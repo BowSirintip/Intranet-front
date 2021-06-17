@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>เพิ่มหัวข้อข่าว</h2>
+<mat-dialog-content>
+    <div style="margin:3%">
+        <div>เรื่อง</div>
+        <input class="box-border1" ngModel name="head" #head>
+        <div>เนื้อหาย่อ</div>
+        <textarea class="box-border1" rows="2" ngModel name="shortnew" #shortnew></textarea>
+    
+        <div>รายละเอียด</div>
+        <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+    
+        <div>รูปภาพหน้าปกข่าว</div>
+        <div>
+            <span class="upload" *ngIf="message">
+                <div><img src="https://localhost:44335/{{imgPath}}"></div>
+            </span>
+        </div>
+        <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display: none;"
+            accept="video/mp4,image/png,image/jpeg,video/avi">
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+        <span class="upload" *ngIf="progress > 0">{{progress}}%</span>
+        <span class="upload" *ngIf="message">{{message}}</span>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button (click)="InsertNews(head,shortnew)" class="btn-save" mat-button>Save</button>
+</mat-dialog-actions>

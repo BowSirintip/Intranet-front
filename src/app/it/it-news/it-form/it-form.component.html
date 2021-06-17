@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="container">
+    </div>
+  </div>
+  <div class="row">
+    <div class="container-fluid">
+        <mat-card class="p-3">
+            
+            <h1>IT NEWS</h1>
+            <div style="text-align: right;padding-right: 3%;">
+              <button mat-button style="background: palegreen;width: 10%;height: 42px;max-width: 100%;" (click)="openDialogCreate()">
+                <span>
+                  <img src="https://image.flaticon.com/icons/png/512/1237/1237946.png" style="width: 10%;">&nbsp;&nbsp;
+                  <label>create</label>
+                </span>
+              </button>
+            </div>
+            <div class="row rounded-1 m-2">
+              <div class="col-lg">
+                <div class="container shadow-sm p-1 bg-white rounded mb-3" *ngFor="let item of val">
+                  <div class="card">
+                    <div class="row mb-8">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <img class="card-img-left  d-flex align-items-center rounded"
+                             style="width: 100%;padding: 5%;"
+                             src="https://localhost:44335/{{item.imagePath}}">
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-8" >
+                        <div class="card-body">
+                          <h2 class="card-title">{{item.headNews}}</h2>
+                          <p class="card-text">
+                            {{item.contentShort}}
+                          </p>
+                        </div>
+                        <div class="card-text d-flex align-items-end flex-column bd-highlight pr-3" style="margin-top: 5%;">
+                          <button mat-button (click)="openDialogit(item.id)"  class="btn btn-sm btn-outline-secondary">MORE...</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </mat-card>
+    </div>
+  
+  
+  </div>
+  
+  

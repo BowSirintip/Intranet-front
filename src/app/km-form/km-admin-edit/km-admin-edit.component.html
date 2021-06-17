@@ -1,0 +1,71 @@
+<h2 mat-dialog-title style="width: 1000px;max-width:100%;">Knowledge Management(KM)</h2>
+<div style="padding: 2% 5% 2% 5%;">
+    <div>เรื่อง</div>
+    <input class="box-border1" ngModel name="head" #head value="{{kmSubject}}">
+    <div>ฝ่าย</div>
+        <select class="box-border1" style="padding: initial;" matNativeControl required ngModel #faction name="faction" id="faction" value="{{kmFaction}}">
+            <option  *ngFor="let item of value" value="{{item.id}}">{{item.dep_name}}</option>
+        </select>
+    <div>รายละเอียด</div>
+    <textarea class="box-border1" rows="2" ngModel name="shortnew" #shortnew value="{{kmdetail}}"></textarea>
+    <div class="row">
+        <div class="col-6" style="height: 150px;">
+            <div>แนบไฟล์ (.pdf)</div>
+            <div class="border-upload-file">
+                <div *ngIf="showPdf == true" class="align-center">
+                    <mat-progress-spinner style="margin-top: 5%" mode="indeterminate" color="accent" value=100
+                        diameter='70' strokeWidth='10'>
+                    </mat-progress-spinner>
+                </div>
+                <div class="border-Files" *ngIf="filename == null && kmpdf != null">
+                    <span class="padding-files">{{kmpdf}}</span>&nbsp;
+                    <button type="button" class="btn btn-success" (click)="file.click()">change</button>
+                </div>
+                <div *ngIf="filename != null && showPdf != true" class="border-Files">
+                    <span class="padding-files">{{filename}}</span>&nbsp;
+                    <button type="button" class="btn btn-success" (click)="file.click()">change</button>
+                </div>
+                <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
+                    style="display: none;" accept="application/pdf">
+                <div *ngIf="kmpdf == '' ">
+                    <button *ngIf="filename == null" class="btn-select-files" (click)="file.click()">
+                        <mat-icon aria-hidden="false">upload</mat-icon>
+                        <br>Select File to Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6" style="height: 150px;">
+            <div>แนบไฟล์วิดีโอ (ไม่เกิน 50 MB)</div>
+            <div class="border-upload-file">
+
+                <div *ngIf="show == true" class="align-center">
+                    <mat-progress-spinner style="margin-top: 5%" mode="indeterminate" color="accent" value=100
+                        diameter='70' strokeWidth='10'>
+                    </mat-progress-spinner>
+                </div>
+                <div class="border-Files" *ngIf="filename2 == null && kmvideo != null">
+                    <span class="padding-files">{{kmvideo}}</span>&nbsp;
+                    <button type="button" class="btn btn-success"  (click)="fileVideo.click()">change</button>
+                </div>
+                <div *ngIf="filename2 != null && show != true" class="border-Files">
+                    <span class="padding-files">{{filename2}}</span>&nbsp;
+                    <button type="button" class="btn btn-success" (click)="fileVideo.click()">change</button>
+                </div>
+                <input type="file" #fileVideo id="fileVideo" placeholder="Choose file"
+                    (change)="uploadFileVideo(fileVideo.files)" style="display: none;">
+                <div *ngIf="kmvideo == null && show == false">
+                    <button *ngIf="filename2 == null" class="btn-select-files" (click)="fileVideo.click()">
+                        <mat-icon aria-hidden="false">upload</mat-icon>
+                        <br>Select Video to Upload
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div style="text-align: -webkit-right;margin-top: 2%;">
+            <button mat-button mat-dialog-close style="background: #f0f0f0;">cancle</button>
+            <button class="btn-save" mat-button (click)="updateKMFile(head,shortnew,faction)">Save</button>
+        </div>
+    </div>

@@ -1,0 +1,39 @@
+<h2 mat-dialog-title style="width: 1000px;max-width:100%;">Upload Files</h2>
+<div style="padding: 2% 5% 2% 5%;">
+    <div>หัวข้อ/ฉบับ/เรื่อง</div>
+    <input class="form-control" style="margin-bottom: 2%;" ngModel name="subject" #subject>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend" *ngIf="hide != 1">
+            <span class="input-group-text" id="basic-addon3">URL:</span>
+        </div>
+        <input type="text" *ngIf="hide != 1" class="form-control" [disabled]="filename != null" aria-describedby="basic-addon3" ngModel
+            name="basicLink" #basicLink (ngModelChange)="onTextChange($event)">
+    </div>
+
+    <div>แนบไฟล์</div>
+    <div class="border-upload-file">
+        <div *ngIf="showURL == true" class="align-center">
+            <mat-progress-spinner style="margin-top: 2%" mode="indeterminate" color="accent" value=100 diameter='70'
+                strokeWidth='10'>
+            </mat-progress-spinner>
+        </div>
+        <div *ngIf="filename != null && showURL != true" class="border-Files" style="padding: 5%;">
+            <span class="padding-files">{{filename}}</span>&nbsp;
+            <button type="button" class="btn btn-success" (click)="file.click()">change</button>
+        </div>
+        <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display: none;"
+            accept="application/pdf">
+        <div *ngIf="showURL == false">
+            <button *ngIf="filename == null" [disabled]="txtValue != null" class="btn-select-files"
+                (click)="file.click()">
+                <mat-icon aria-hidden="false">upload</mat-icon>
+                <br>Select File to Upload
+            </button>
+        </div>
+    </div>
+
+    <div style="text-align: -webkit-right;margin-top: 2%;">
+        <button mat-button mat-dialog-close style="background: #f0f0f0;" (click)="removeValue()">cancle</button>
+        <button class="btn-save" mat-button (click)="saveMeneFile(subject)">Save</button>
+    </div>
+</div>
